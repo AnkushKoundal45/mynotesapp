@@ -1,7 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:mynotes/constants/routes.dart';
+import 'package:mynotes/services/auth/auth_exceptions.dart';
+import 'package:mynotes/services/auth/auth_service.dart';
 import 'package:mynotes/utilities/show_error_dialog.dart';
 
 class LoginView extends StatefulWidget {
@@ -59,10 +60,12 @@ class _LoginViewState extends State<LoginView> {
                 try {
                   final email = _email.text;
                   final password = _password.text;
-                  await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: email, password: password);
-                  final user = FirebaseAuth.instance.currentUser;
-                  if (user?.emailVerified ?? false) {
+                  await AuthService.firebase().logIn(
+                    email: email,
+                    password: password,
+                  );
+                  final user = AuthService.firebase().currentUser;
+                  if (user?.isEmailVerified ?? false) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                       mynotesRoute,
                       (route) => false,
@@ -72,32 +75,23 @@ class _LoginViewState extends State<LoginView> {
                       verifyemailRoute,
                     );
                   }
-                } on FirebaseAuthException catch (e) {
-                  if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
-                    return await showErrorDialog(
-                      context,
-                      'Invalid E-mail or Password',
-                    );
-                  } else if (e.code == 'invalid-email') {
-                    return await showErrorDialog(
-                      context,
-                      'Invalid E-mail',
-                    );
-                  } else if (e.code == 'channel-error') {
-                    return await showErrorDialog(
-                      context,
-                      'Enter your E-mail or Password',
-                    );
-                  } else {
-                    return await showErrorDialog(
-                      context,
-                      'Error: ${e.code}',
-                    );
-                  }
-                } catch (e) {
+                } on InvalidLoginCredentials {
+                  return await showErrorDialog(
+                      context, 'Invalid E-mail or Password');
+                } on ChannelErrorAuthException {
                   await showErrorDialog(
                     context,
-                    e.toString(),
+                    'Enter your E-mail or Password',
+                  );
+                } on InvalidEmailAuthException {
+                  await showErrorDialog(
+                    context,
+                    'Invalid E-mail',
+                  );
+                } on GenericAuthException {
+                  await showErrorDialog(
+                    context,
+                    'Authentication Error',
                   );
                 }
               },

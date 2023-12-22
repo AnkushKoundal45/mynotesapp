@@ -1,3 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:mynotes/firebase_options.dart';
+
 import 'auth_exceptions.dart';
 import 'auth_provider.dart';
 import 'auth_user.dart';
@@ -52,9 +55,9 @@ class FirebaseAuthProvider implements AuthProvider {
   Future<AuthUser> logIn({
     required String email,
     required String password,
-  }) async{
+  }) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -64,17 +67,21 @@ class FirebaseAuthProvider implements AuthProvider {
       } else {
         throw UserNotLoggedInAuthException();
       }
-  }   on FirebaseAuthException catch (e) {
-                  if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
-                   throw InvalidLoginCredentials();
-                  } else if (e.code == 'invalid-email') {
-                   throw InvalidEmailAuthException();
-                  } else if (e.code == 'channel-error') {
-                    throw ChannelErrorAuthException();
-                   } else {
-                   throw GenericAuthException();
-                  }
-  } 
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+        throw InvalidLoginCredentials();
+      } else if (e.code == 'invalid-email') {
+        throw InvalidEmailAuthException();
+      } else if (e.code == 'channel-error') {
+        throw ChannelErrorAuthException();
+      } else {
+        throw GenericAuthException();
+      }
+    } catch (e) {
+      throw GenericAuthException();
+    }
+  }
+
   @override
   Future<void> logOut() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -91,5 +98,12 @@ class FirebaseAuthProvider implements AuthProvider {
     if (user != null) {
       await user.sendEmailVerification();
     }
+  }
+
+  @override
+  Future<void> intialize() async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
   }
 }
