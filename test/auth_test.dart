@@ -99,7 +99,8 @@ class MockAuthProvider implements AuthProvider {
     if (email == 'foobar@gmail.com') throw InvalidEmailAuthException();
     if (password == 'foobar') throw InvalidLoginCredentials();
     await Future.delayed(const Duration(seconds: 2));
-    const user = AuthUser(isEmailVerified: false);
+    const user = AuthUser(,
+      isEmailVerified: false);
     _user = user;
     return Future.value(_user);
   }
