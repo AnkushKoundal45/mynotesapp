@@ -12,12 +12,17 @@ class NotesService {
   List<DatabaseNote> _note = [];
 
   static final NotesService _shared = NotesService._sharedInstance();
-  NotesService._sharedInstance();
+  NotesService._sharedInstance() {
+    _notesStreamController =
+        StreamController<List<DatabaseNote>>.broadcast(onListen: () {
+      _notesStreamController.add(_note);
+    }); // broadcast fix a basic error of listening to stream for multiple times. We will hook it,later with the list created above.
+  }
+  late final StreamController<List<DatabaseNote>>
+      _notesStreamController; // broadcast fix a basic error of listening to stream for multiple times. We will hook it,later with the list created above.
+
   factory NotesService() => _shared;
 
-  final _notesStreamController = StreamController<
-      List<
-          DatabaseNote>>.broadcast(); // broadcast fix a basic error of listening to stream for multiple times. We will hook it,later with the list created above.
   Stream<List<DatabaseNote>> get allNotes => _notesStreamController.stream;
   Database _getDatabseOpenOrThrow() {
     final db = _db;
@@ -119,7 +124,7 @@ class NotesService {
       const text = '';
       final noteId = await db.insert(noteTable, {
         userIdColumn: owner.id,
-        text: text,
+        textColumn: text,
         isSyncedWithCloudColumn: 1,
       });
       final note = DatabaseNote(
@@ -179,7 +184,7 @@ class NotesService {
       throw UserAlreadyExists();
     } else {
       final id = await db.insert(userTable, {
-        emailColumn: [email.toLowerCase()],
+        emailColumn: email.toLowerCase(),
       });
       return DatabaseUser(id: id, email: email);
     }
@@ -302,7 +307,7 @@ const textColumn = 'text';
 const isSyncedWithCloudColumn = 'is_synced_with_cloud';
 const createUserTable = '''CREATE TABLE IF NOT EXISTS "user" (
 	"id"	INTEGER NOT NULL,
-	"email"	TEXT NOT NULL UNIQUE,
+	"email"	STRING NOT NULL UNIQUE,
 	PRIMARY KEY("id" AUTOINCREMENT)
 ); ''';
 const createNoteTable = ''' CREATE TABLE IF NOT EXISTS "note" (
