@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:mynotes/extensions/list/filter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' show join;
@@ -8,6 +9,7 @@ import 'crud_exceptions.dart';
 
 class NotesService {
   Database? _db;
+  DatabaseUser? _user;
   //   a private function which checks if db is open or not and return db if open.
   List<DatabaseNote> _note = [];
 
@@ -23,7 +25,15 @@ class NotesService {
 
   factory NotesService() => _shared;
 
-  Stream<List<DatabaseNote>> get allNotes => _notesStreamController.stream;
+  Stream<List<DatabaseNote>> get allNotes =>
+      _notesStreamController.stream.filter((note) {
+        final currentUser = _user;
+        if (currentUser != null) {
+          return note.userId == currentUser.id;
+        } else {
+          throw UserShouldBeSetBeforeReadingAllNotes();
+        }
+      });
   Database _getDatabseOpenOrThrow() {
     final db = _db;
     if (db == null) {
@@ -33,21 +43,30 @@ class NotesService {
     }
   }
 
-  Future<DatabaseUser> getOrCreateUser({required email}) async {
+  Future<DatabaseUser> getOrCreateUser({
+    required email,
+    bool setAsCurrentUser = true,
+  }) async {
     await _ensureDbIsOpen();
 
     try {
       final user = await fetchUser(email: email);
+      if (setAsCurrentUser) {
+        _user = user;
+      }
       return user;
     } on CouldNotFindUser {
       final createdUser = await createUser(email: email);
+      if (setAsCurrentUser) {
+        _user = createdUser;
+      }
       return createdUser;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> _catchNotes() async {
+  Future<void> _cacheNotes() async {
     final allNotes = await getAllNotes();
     _note = allNotes.toList();
     _notesStreamController.add(_note);
@@ -67,10 +86,15 @@ class NotesService {
   }) async {
     final db = _getDatabseOpenOrThrow();
     await fetchNote(id: note.id);
-    final updateCount = await db.update(noteTable, {
-      textColumn: text,
-      isSyncedWithCloudColumn: 0,
-    });
+    final updateCount = await db.update(
+      noteTable,
+      {
+        textColumn: text,
+        isSyncedWithCloudColumn: 0,
+      },
+      where: 'id =?',
+      whereArgs: [note.id],
+    );
     if (updateCount == 0) {
       throw CouldNotUpdateNote();
     } else {
@@ -228,7 +252,7 @@ class NotesService {
       await db.execute(createUserTable);
 // create note table
       await db.execute(createNoteTable);
-      await _catchNotes();
+      await _cacheNotes();
     } on MissingPlatformDirectoryException {
       throw UnableToGetDocumentDirectory();
     }
