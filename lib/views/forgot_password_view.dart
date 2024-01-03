@@ -34,14 +34,24 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
-          log('AuthState: $state');
           if (state is AuthStateForgotPassword) {
             if (state.hasSentEmail) {
               _controller.clear();
               await showPasswordResetDialog(context);
             }
             if (state.exception != null) {
-              await showErrorDialog(context, "Can't process ypur request");
+              log(state.exception.toString());
+              if (state.exception is InvalidLoginCredentials) {
+                return await showErrorDialog(
+                    context, 'Invalid E-mail or Password');
+              } else if (state.exception is ChannelErrorAuthException) {
+                return await showErrorDialog(
+                    context, 'Enter your E-mail or Password');
+              } else if (state.exception is InvalidEmailAuthException) {
+                return await showErrorDialog(context, 'Invalid E-mail');
+              } else if (state.exception is GenericAuthException) {
+                return await showErrorDialog(context, 'Authentication Error');
+              }
             }
           }
         },

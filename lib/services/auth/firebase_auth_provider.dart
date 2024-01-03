@@ -114,17 +114,16 @@ class FirebaseAuthProvider implements AuthProvider {
         email: toEmail,
       );
     } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case 'firebase_auth/invalid-credential':
-          throw InvalidLoginCredentials();
-        case 'firebase_auth/invalid-email':
-          throw InvalidEmailAuthException();
-        case 'firebase_auth/channel-error':
-          throw ChannelErrorAuthException();
-        default:
-          throw GenericAuthException();
+      if (e.code == 'invalid-credential') {
+        throw InvalidLoginCredentials();
+      } else if (e.code == 'invalid-email') {
+        throw InvalidEmailAuthException();
+      } else if (e.code == 'channel-error') {
+        throw ChannelErrorAuthException();
+      } else {
+        throw GenericAuthException();
       }
-    } catch (_) {
+    } catch (e) {
       throw GenericAuthException();
     }
   }
