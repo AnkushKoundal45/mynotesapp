@@ -68,7 +68,7 @@ class FirebaseAuthProvider implements AuthProvider {
         throw UserNotLoggedInAuthException();
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+      if (e.code == 'invalid-credential') {
         throw InvalidLoginCredentials();
       } else if (e.code == 'invalid-email') {
         throw InvalidEmailAuthException();
