@@ -1,31 +1,35 @@
-#  Flutter MyNotes App
+#  Flutter MyNotes App 📝
 
 [![Flutter](https://img.shields.io/badge/Flutter-2.8.0-blue.svg)](https://flutter.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 A simple notes app built with Flutter.
 
-## Features
+## Features ✨
 
-- Create, edit, update and delete notes.
+- Create, edit, and delete notes.
+- Organize notes with categories.
 - User-friendly interface.
 
-## Screenshots
+## Screenshots 📸
 
-![Screenshot 1](https://ibb.co/XySwh1t)
-![Screenshot 2](https://ibb.co/2sWWrvb)
-![Screenshot 3](https://ibb.co/P5HRmht)
+<div align="center">
+  <img src="https://ibb.co/XySwh1t" alt="Screenshot 1" width="200" />
+  <img src="https://ibb.co/2sWWrvb" alt="Screenshot 2" width="200" />
+  <img src="https://ibb.co/P5HRmht" alt="Screenshot 3" width="200" />
 
-## Getting Started
+</div>
+
+## Getting Started 🚀
 
 Follow these instructions to get a copy of the project up and running on your local machine.
 
-### Prerequisites
+### Prerequisites 🛠️
 
 - Flutter installed on your machine.
 - Git installed on your machine.
 
-### Installation
+### Installation 🧭
  1. Clone the repository:
 ```bash
 git clone https://github.com/AnkushKoundal45/mynotesapp.git
@@ -46,7 +50,7 @@ flutter run
 Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) file for details.
 
 ## Acknowledgments
 Thanks to Flutter for the amazing framework.
@@ -55,6 +59,8 @@ Feel free to reach out for questions or feedback.
 
 ## Connect with Me
 Feel free to reach out for questions or feedback.
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue.svg)](www.linkedin.com/in/ankush-koundal-9989171b2)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue.svg)](https://www.linkedin.com/in/ankush-koundal-9989171b2/)
 
 🚀 Happy coding!
+
+
