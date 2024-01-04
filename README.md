@@ -1,4 +1,4 @@
-###  Flutter MyNotes App 📝
+#  Flutter MyNotes App 📝
 
 [![Flutter](https://img.shields.io/badge/Flutter-2.8.0-blue.svg)](https://flutter.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
