@@ -14,9 +14,9 @@ A simple notes app built with Flutter.
 ## Screenshots 📸
 
 <div align="center">
-  <img src="https://ibb.co/XySwh1t" alt="Screenshot 1" width="200" />
-  <img src="https://ibb.co/2sWWrvb" alt="Screenshot 2" width="200" />
-  <img src="https://ibb.co/P5HRmht" alt="Screenshot 3" width="200" />
+  <img src="https://i.imgur.com/efJGVon.png" alt="Screenshot 1" width="200" />
+  <img src="https://i.imgur.com/78z31AJ.png" alt="Screenshot 2" width="200" />
+  <img src="https://i.imgur.com/IjmjFex.png" alt="Screenshot 3" width="200" />
 
 </div>
 
@@ -59,7 +59,7 @@ Feel free to reach out for questions or feedback.
 
 ## Connect with Me
 Feel free to reach out for questions or feedback.
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue.svg)](https://www.linkedin.com/in/ankush-koundal-9989171b2/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-AnkushKoundal-blue.svg)](https://www.linkedin.com/in/ankush-koundal-9989171b2/)
 
 🚀 Happy coding!
 
