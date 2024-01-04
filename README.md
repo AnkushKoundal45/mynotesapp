@@ -55,6 +55,6 @@ Feel free to reach out for questions or feedback.
 
 ## Connect with Me
 Feel free to reach out for questions or feedback.
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Ankush Koundal-blue.svg)](www.linkedin.com/in/ankush-koundal-9989171b2)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue.svg)](www.linkedin.com/in/ankush-koundal-9989171b2)
 
 🚀 Happy coding!
