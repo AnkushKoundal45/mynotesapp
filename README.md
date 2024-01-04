@@ -1,4 +1,4 @@
-#  Flutter MyNotes App 📝
+  Flutter MyNotes App 📝
 
 [![Flutter](https://img.shields.io/badge/Flutter-2.8.0-blue.svg)](https://flutter.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -45,18 +45,17 @@ flutter pub get
 ```bash
 flutter run
 ```
-## Contributing
+## Contributing 🤝
 Contributions are welcome! Feel free to open issues or submit pull requests.
 
-## License
+## License 📝
 This project is licensed under the MIT License - see the [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) file for details.
 
-## Acknowledgments
-Thanks to Flutter for the amazing framework.
-Connect with Me
-Feel free to reach out for questions or feedback.
+## Acknowledgments ✨️
+Thanks to [![Flutter](https://img.shields.io/badge/Flutter-2.8.0-blue.svg)](https://flutter.dev/) for the amazing framework.
 
-## Connect with Me
+
+## Connect with Me 🌐
 Feel free to reach out for questions or feedback.
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-AnkushKoundal-blue.svg)](https://www.linkedin.com/in/ankush-koundal-9989171b2/)
 
