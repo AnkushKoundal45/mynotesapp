@@ -55,58 +55,60 @@ class _LoginViewState extends State<LoginView> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
-                  'Please log in to your account to interact with create note page.'),
-              TextField(
-                enableSuggestions: false,
-                autocorrect: false,
-                keyboardType: TextInputType.emailAddress,
-                decoration:
-                    const InputDecoration(hintText: 'Enter Your Email Here'),
-                controller: _email,
-              ),
-              TextField(
-                decoration:
-                    const InputDecoration(hintText: 'Enter Your Password Here'),
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                controller: _password,
-              ),
-              Center(
-                child: Column(
-                  children: [
-                    TextButton(
-                        onPressed: () async {
-                          final email = _email.text;
-                          final password = _password.text;
-                          context.read<AuthBloc>().add(
-                                AuthEventLogIn(email, password),
-                              );
-                        },
-                        child: const Text('Login')),
-                    TextButton(
-                        onPressed: () {
-                          context.read<AuthBloc>().add(
-                                const AuthEventForgotPassword(),
-                              );
-                        },
-                        child: const Text('Forgot Password?')),
-                    TextButton(
-                        onPressed: () {
-                          context.read<AuthBloc>().add(
-                                const AuthEventShouldRegister(),
-                              );
-                        },
-                        child:
-                            const Text('Not registered yet? Register Here!')),
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Text(
+                    'Please log in to your account to interact with create note page.'),
+                TextField(
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration:
+                      const InputDecoration(hintText: 'Enter Your Email Here'),
+                  controller: _email,
                 ),
-              ),
-            ],
+                TextField(
+                  decoration: const InputDecoration(
+                      hintText: 'Enter Your Password Here'),
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  controller: _password,
+                ),
+                Center(
+                  child: Column(
+                    children: [
+                      TextButton(
+                          onPressed: () async {
+                            final email = _email.text;
+                            final password = _password.text;
+                            context.read<AuthBloc>().add(
+                                  AuthEventLogIn(email, password),
+                                );
+                          },
+                          child: const Text('Login')),
+                      TextButton(
+                          onPressed: () {
+                            context.read<AuthBloc>().add(
+                                  const AuthEventForgotPassword(),
+                                );
+                          },
+                          child: const Text('Forgot Password?')),
+                      TextButton(
+                          onPressed: () {
+                            context.read<AuthBloc>().add(
+                                  const AuthEventShouldRegister(),
+                                );
+                          },
+                          child:
+                              const Text('Not registered yet? Register Here!')),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

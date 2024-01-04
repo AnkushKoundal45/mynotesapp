@@ -62,38 +62,40 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
           ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                const Text(
-                    'If you forgot your password please enter your email and we will send you an email for password reset.'),
-                TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  autocorrect: false,
-                  autofocus: true,
-                  controller: _controller,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter Your Email Here',
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Text(
+                      'If you forgot your password please enter your email and we will send you an email for password reset.'),
+                  TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    autocorrect: false,
+                    autofocus: true,
+                    controller: _controller,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter Your Email Here',
+                    ),
                   ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    final email = _controller.text;
+                  TextButton(
+                    onPressed: () {
+                      final email = _controller.text;
 
-                    context
-                        .read<AuthBloc>()
-                        .add(AuthEventForgotPassword(email: email));
-                  },
-                  child: const Text('Send me email for password reset'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    context.read<AuthBloc>().add(
-                          const AuthEventLogOut(),
-                        );
-                  },
-                  child: const Text('Back to login page'),
-                ),
-              ],
+                      context
+                          .read<AuthBloc>()
+                          .add(AuthEventForgotPassword(email: email));
+                    },
+                    child: const Text('Send me email for password reset'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      context.read<AuthBloc>().add(
+                            const AuthEventLogOut(),
+                          );
+                    },
+                    child: const Text('Back to login page'),
+                  ),
+                ],
+              ),
             ),
           ),
         ));
