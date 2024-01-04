@@ -12,8 +12,9 @@ A simple notes app built with Flutter.
 
 ## Screenshots
 
-![Screenshot 1](assets\screenshots\Screenshot 2024-01-04 164006.png)
-![Screenshot 2](assets\screenshots\Screenshot 2024-01-04 164022.png)
+![Screenshot 1](https://ibb.co/XySwh1t)
+![Screenshot 2](https://ibb.co/2sWWrvb)
+![Screenshot 3](https://ibb.co/P5HRmht)
 
 ## Getting Started
 
@@ -41,19 +42,19 @@ flutter pub get
 ```bash
 flutter run
 ```
-Contributing
+## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests.
 
-License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Acknowledgments
+## Acknowledgments
 Thanks to Flutter for the amazing framework.
 Connect with Me
 Feel free to reach out for questions or feedback.
 
-Connect with Me
+## Connect with Me
 Feel free to reach out for questions or feedback.
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-YourName-blue.svg)](www.linkedin.com/in/ankush-koundal-9989171b2)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Ankush Koundal-blue.svg)](www.linkedin.com/in/ankush-koundal-9989171b2)
 
 🚀 Happy coding!
