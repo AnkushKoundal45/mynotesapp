@@ -7,8 +7,7 @@ A simple notes app built with Flutter.
 
 ## Features ✨
 
-- Create, edit, and delete notes.
-- Organize notes with categories.
+- Create, edit, update and delete notes.
 - User-friendly interface.
 
 ## Screenshots 📸
